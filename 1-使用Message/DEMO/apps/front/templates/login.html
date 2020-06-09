@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <style>
+        form {
+
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border:1px solid #000;
+            padding:22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <el-alert
+                    {% if message.tags %}
+                        title="{{ message }}"
+                        type="{{ message.tags }}">
+                    {% endif %}
+                </el-alert>
+
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+
+    <form action="{% url 'login' %}" method="post">
+        <el-input type="text"  name="username"  v-model="username"></el-input>
+        <el-input type="password"  name="password" v-model="password"></el-input>
+
+        <el-button type="primary" native-type="submit"> 登录</el-button>
+    </form>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data(){
+            return {
+                username: '',
+                password: ''
+            }
+        },
+        methods:{
+
+        }
+    })
+</script>
+
+</body>
+</html>
